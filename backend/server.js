@@ -1,26 +1,28 @@
 import express from "express"
 import mongoose from "mongoose"
 import { PORT, MONGO_URI } from "./config.js"
-import { Book } from './models/bookModel.js'
+import bookRoutes from "./routes/bookRoutes.js"
+import cors from "cors"
 
 const app = express()
 
 // middleware to parse JSON request body
 app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send("home page")
-})
+// middleware to handle CORS policy
+// option 1: allow all origins
+// app.use(cors()) 
+// option 2: only allow requests from React app
+app.use(cors({ 
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"]
+}))
 
-// Add a book
-app.post('/books', async (req, res) => {
-    try {
-        const book = await Book.create(req.body)
-        res.status(201).json({message: "Book added successfully", book})
-    } catch (error) {
-        console.log(error.message)
-        res.status(500).json({error: error.message})
-    }
+app.use('/books', bookRoutes)
+
+app.get('/', (req, res) => {
+    res.send("Welcome to MERN Bookstore")
 })
 
 mongoose.connect(MONGO_URI)

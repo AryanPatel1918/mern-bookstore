@@ -10,12 +10,13 @@ const bookSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        publishYear: {
+        year: {
             type: Number,
             required: true
         }
     },
     {
+        strict: "throw",
         timestamps: true
     }
 )
