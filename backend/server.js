@@ -11,13 +11,13 @@ app.use(express.json())
 
 // middleware to handle CORS policy
 // option 1: allow all origins
-// app.use(cors()) 
-// option 2: only allow requests from React app
-app.use(cors({ 
-  origin: "http://localhost:3000",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"]
-}))
+app.use(cors()) 
+// option 2: only allow requests from port 300 (i.e. React app)
+// app.use(cors({ 
+//   origin: "http://localhost:3000",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type"]
+// }))
 
 app.use('/books', bookRoutes)
 
