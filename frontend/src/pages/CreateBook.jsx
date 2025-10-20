@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function CreateBooks() {
+export default function CreateBook() {
   return (
-    <div>CreateBooks</div>
+    <div>CreateBook</div>
   )
 }

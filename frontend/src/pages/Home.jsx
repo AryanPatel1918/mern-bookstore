@@ -42,11 +42,11 @@ export default function Home() {
         <table className='w-full border-separate border-spacing-2'>
           <thead>
             <tr>
-              <th className='p-1 border border-slate-600 rounded-md'>No</th>
-              <th className='p-1 border border-slate-600 rounded-md'>Title</th>
-              <th className='p-1 border border-slate-600 rounded-md max-md:hidden'>Author</th>
-              <th className='p-1 border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
-              <th className='p-1 border border-slate-600 rounded-md'>Operations</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>No</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Title</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Author</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Operations</th>
             </tr>
           </thead>
           <tbody>
