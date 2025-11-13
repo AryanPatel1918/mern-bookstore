@@ -20,10 +20,10 @@ export default function Home() {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Books</h1>
-        <Link to='/books/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
+      <div className='flex justify-between items-center my-8'>
+        <h1 className='text-3xl'>Books</h1>
+        <Link to='/books/create' title="Create Book">
+          <MdOutlineAddBox className='text-green-600 text-4xl' />
         </Link>
       </div>
       {loading ? (
@@ -50,13 +50,13 @@ export default function Home() {
                 <td className='border border-slate-700 rounded-md text-center max-md:hidden'>{book.year}</td>
                 <td className='border border-slate-700 rounded-md text-center'>
                   <div className='flex justify-center gap-x-4'>
-                    <Link to={`/books/details/${book._id}`}>
+                    <Link to={`/books/details/${book._id}`} title="Book Details">
                       <BsInfoCircle className='text-xl text-blue-500 hover:text-blue-600' />
                     </Link>
-                    <Link to={`/books/edit/${book._id}`}>
+                    <Link to={`/books/edit/${book._id}`} title="Edit Book">
                       <AiOutlineEdit className='text-xl text-yellow-500 hover:text-yellow-600' />
                     </Link>
-                    <Link to={`/books/delete/${book._id}`}>
+                    <Link to={`/books/delete/${book._id}`} title="Delete Book">
                       <MdOutlineDelete className='text-xl text-red-600 hover:text-red-700' />
                     </Link>
                   </div>
