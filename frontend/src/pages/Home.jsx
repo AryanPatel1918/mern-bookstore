@@ -20,10 +20,11 @@ export default function Home() {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-between items-center my-8'>
+      <div className='flex justify-between items-center my-2 p-2 lg:my-4'>
         <h1 className='text-3xl'>Books</h1>
-        <Link to='/books/create' title="Create Book">
-          <MdOutlineAddBox className='text-green-600 text-4xl' />
+        <Link to='/books/create' title="Create Book" className='flex justify-center items-center gap-1 bg-green-500 hover:bg-green-600 transition duration-200 ease-in-out p-2 rounded-lg'>
+          <MdOutlineAddBox className='text-white text-2xl' />
+          <span className='text-white font-medium'>Create Book</span>
         </Link>
       </div>
       {loading ? (
