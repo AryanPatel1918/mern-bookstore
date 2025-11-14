@@ -57,6 +57,10 @@ export async function updateBookById(req, res) {
         res.json({ message: "Book updated successfully", updatedBook })
     } catch (error) {
         console.log(error.message)
+        // Validation errors → 400
+        if (error.name === "ValidationError") {
+            return res.status(400).json({ error: error.message });
+        }
         res.status(500).json({ error: error.message })
     }
 }

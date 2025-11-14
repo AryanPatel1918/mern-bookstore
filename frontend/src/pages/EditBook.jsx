@@ -1,7 +1,89 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import BackButton from '../components/BackButton'
+import Spinner from '../components/Spinner'
+import { useParams, useNavigate } from 'react-router-dom'
 
 export default function EditBook() {
+  const [book, setBook] = useState({
+    title: "",
+    author: "",
+    year: ""
+  })
+  const [loading, setLoading] = useState(false)
+  const { id } = useParams()
+  
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    setLoading(true)
+    axios.get(`http://localhost:5000/books/${id}`)
+      .then(response => setBook({ title: response.data.title, author: response.data.author, year: response.data.year }))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))
+  }, [])
+
+
+  function handleBookInfo(e) {
+    setBook(prevBook => ({ ...prevBook, [e.target.name]: e.target.value }))
+  }
+  
+  function handleUpdateBook() {
+    const title = book.title.trim();
+    const author = book.author.trim();
+    const year = book.year.toString().trim();
+
+    // Frontend validation
+    if (!title || !author || !year) {
+      alert("All fields are required")
+      return
+    }
+
+    const data = { title, author, year: Number(year) }
+
+    setLoading(true)
+    axios.put(`http://localhost:5000/books/${id}`, data)
+      .then(() => {
+        navigate('/')
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log("Status: ", error.response.status)
+          console.log("Data: ", error.response.data)
+          console.log("Message: ", error.response.data.error)
+          alert(error.response.data.error)
+        } else {
+          console.log("Error:", error.message);
+          alert("Network error or server not reachable.");
+        }
+      })
+      .finally(() => setLoading(false))
+    }
+    
   return (
-    <div>EditBook</div>
+    <div className='p-4'>
+      <BackButton />
+      {loading && <Spinner />}
+      <div className='flex flex-col gap-4 border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto mt-10 shadow-xl'>
+        <h2 className="text-3xl font-semibold text-sky-600 mb-4 border-b border-sky-200 pb-2">
+          Edit Book
+        </h2>
+        <div className=''>
+          <label htmlFor='title' className='text-lg text-gray-600 font-medium mr-3'>Title:</label>
+          <input id='title' name='title' onChange={handleBookInfo} value={book.title} className='outline-0 border-2 border-gray-600 px-1.5 py-1 w-full' />
+        </div>
+        <div className=''>
+          <label htmlFor='author' className='text-lg text-gray-600 font-medium mr-3'>Author:</label>
+          <input id='author' name='author' onChange={handleBookInfo} value={book.author} className='outline-0 border-2 border-gray-600 px-1.5 py-1 w-full' />
+        </div>
+        <div className=''>
+          <label htmlFor='year' className='text-lg text-gray-600 font-medium mr-3'>Publish Year:</label>
+          <input id='year' type='number' name='year' onChange={handleBookInfo} value={book.year} className='outline-0 border-2 border-gray-600 px-1.5 py-1 w-full' />
+        </div>
+        <button className='py-2 px-4 bg-sky-400 text-white font-medium w-fit mx-auto mt-2 rounded cursor-pointer hover:bg-sky-500 transition duration-200 ease-in-out' onClick={handleUpdateBook}>
+          Save Changes
+        </button>
+      </div>
+    </div>
   )
 }

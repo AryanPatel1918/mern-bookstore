@@ -19,12 +19,20 @@ export default function CreateBook() {
   }
   
   function handleCreateBook() {
-    const title = book.title.trim();
-    const author = book.author.trim();
-    const year = book.year.toString().trim();
+    const title = book.title.trim()
+    const author = book.author.trim()
+    const year = book.year.toString().trim()
+
+    // Frontend validation
+    if (!title || !author || !year) {
+      alert("All fields are required")
+      return
+    }
+
     const data = { title, author, year: Number(year) }
+
     setLoading(true)
-    axios.post(`http://localhost:5000/books`, data)
+    axios.post('http://localhost:5000/books', data)
       .then(() => {
         navigate('/')
       })
@@ -35,8 +43,8 @@ export default function CreateBook() {
           console.log("Message: ", error.response.data.error)
           alert(error.response.data.error)
         } else {
-          console.log("Error:", error.message);
-          alert("Network error or server not reachable.");
+          console.log("Error:", error.message)
+          alert("Network error or server not reachable.")
         }
       })
       .finally(() => setLoading(false))
