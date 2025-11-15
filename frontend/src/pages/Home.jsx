@@ -22,7 +22,7 @@ export default function Home() {
     <div className='p-4'>
       <div className='flex justify-between items-center my-2 p-2 lg:my-4'>
         <h1 className='text-3xl'>Books</h1>
-        <Link to='/books/create' title="Create Book" className='flex justify-center items-center gap-1 bg-green-500 hover:bg-green-600 transition duration-200 ease-in-out p-2 rounded-lg'>
+        <Link to='/books/create' title="Create Book" className='flex justify-center items-center gap-1 bg-green-500 hover:bg-green-600 transition duration-200 ease-in-out px-3 py-2 rounded-lg'>
           <MdOutlineAddBox className='text-white text-2xl' />
           <span className='text-white font-medium'>Create Book</span>
         </Link>
@@ -35,11 +35,11 @@ export default function Home() {
         <table className='w-full border-separate border-spacing-2'>
           <thead>
             <tr>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>No</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Title</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Author</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Operations</th>
+              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md'>No</th>
+              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md'>Title</th>
+              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Author</th>
+              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
+              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md'>Options</th>
             </tr>
           </thead>
           <tbody>

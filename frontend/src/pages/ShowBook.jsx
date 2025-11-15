@@ -24,7 +24,7 @@ export default function ShowBook() {
         <Spinner />
       ) : (
         <div className="flex flex-col gap-3 border-2 border-sky-400 rounded-xl p-6 w-fit mx-auto mt-10 shadow-xl bg-white">
-          <h2 className="text-3xl font-semibold text-sky-600 mb-4 border-b border-sky-200 pb-2">
+          <h2 className="text-3xl font-semibold text-sky-600 mb-2 border-b border-sky-200 pb-2">
             Book Details
           </h2>
           {[
@@ -56,8 +56,8 @@ export default function ShowBook() {
             },
           ].map(({ label, value }) => (
             <div key={label} className="flex flex-wrap items-center">
-              <span className="w-40 text-gray-500 font-medium">{label}:</span>
-              <span className="text-gray-800">{value}</span>
+              <span className="w-50 text-lg text-gray-500 font-medium">{label}:</span>
+              <span className="text-lg text-gray-800">{value}</span>
             </div>
           ))}
         </div>

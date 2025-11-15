@@ -54,7 +54,7 @@ export default function EditBook() {
           alert(error.response.data.error)
         } else {
           console.log("Error:", error.message);
-          alert("Network error or server not reachable.");
+          alert("Error: Network error or server not reachable.");
         }
       })
       .finally(() => setLoading(false))
@@ -65,7 +65,7 @@ export default function EditBook() {
       <BackButton />
       {loading && <Spinner />}
       <div className='flex flex-col gap-4 border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto mt-10 shadow-xl'>
-        <h2 className="text-3xl font-semibold text-sky-600 mb-4 border-b border-sky-200 pb-2">
+        <h2 className="text-3xl font-semibold text-sky-600 mt-2 mb-2 border-b border-sky-200 pb-2">
           Edit Book
         </h2>
         <div className=''>
@@ -80,7 +80,7 @@ export default function EditBook() {
           <label htmlFor='year' className='text-lg text-gray-600 font-medium mr-3'>Publish Year:</label>
           <input id='year' type='number' name='year' onChange={handleBookInfo} value={book.year} className='outline-0 border-2 border-gray-600 px-1.5 py-1 w-full' />
         </div>
-        <button className='py-2 px-4 bg-sky-400 text-white font-medium w-fit mx-auto mt-2 rounded cursor-pointer hover:bg-sky-500 transition duration-200 ease-in-out' onClick={handleUpdateBook}>
+        <button className='w-full py-2 px-4 bg-sky-400 text-white font-medium mx-auto mt-2 rounded cursor-pointer hover:bg-sky-500 transition duration-200 ease-in-out' onClick={handleUpdateBook}>
           Save Changes
         </button>
       </div>
