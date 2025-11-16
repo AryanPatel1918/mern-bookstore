@@ -5,11 +5,11 @@ export default function BackButton({ destination = "/" }) {
   return (
     <Link
       to={destination}
-      className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-1 rounded-md w-fit flex justify-center items-center gap-1"
+      className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-md w-fit flex justify-center items-center gap-1"
       title="Back"
     >
       <BsArrowLeft className="text-2xl" />
-      Back
+      <span className="font-medium">Back</span>
     </Link>
   )
 }
