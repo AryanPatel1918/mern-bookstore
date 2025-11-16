@@ -21,8 +21,19 @@ export default function Home() {
   return (
     <div className='p-4'>
       <div className='flex justify-between items-center my-2 p-2 lg:my-4'>
-        <h1 className='text-3xl'>Books</h1>
-        <Link to='/books/create' title="Create Book" className='flex justify-center items-center gap-1 bg-green-500 hover:bg-green-600 transition duration-200 ease-in-out px-3 py-2 rounded-lg'>
+        <div className='flex justify-center items-center gap-1.5'>
+          <div className='w-[40px] h-[40px]'>
+            <img src="/favicon.png" className='size-full object-cover' />
+          </div>
+          <h1 className='text-3xl lg:text-4xl'>
+            <span className='text-blue-500'>B</span>
+            <span className='text-red-500'>o</span>
+            <span className='text-amber-500'>o</span>
+            <span className='text-blue-500'>k</span>
+            <span className='text-red-500'>s</span>
+          </h1>
+        </div>
+        <Link to='/books/create' title="Create Book" className='flex justify-center items-center gap-1 bg-green-500 hover:bg-green-600 transition duration-200 ease-in-out px-2 py-1.5 lg:px-3 lg:py-2 rounded-lg'>
           <MdOutlineAddBox className='text-white text-2xl' />
           <span className='text-white font-medium'>Create Book</span>
         </Link>
@@ -32,14 +43,14 @@ export default function Home() {
           <Spinner />
         </div>
       ) : (
-        <table className='w-full border-separate border-spacing-2'>
+        <table className='w-full border-separate border-spacing-2 mt-4'>
           <thead>
             <tr>
-              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md'>No</th>
-              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md'>Title</th>
-              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Author</th>
-              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
-              <th className='text-lg p-1 tracking-wide border border-slate-600 rounded-md'>Options</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>No</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Title</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Author</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
+              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Options</th>
             </tr>
           </thead>
           <tbody>
