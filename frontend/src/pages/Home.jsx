@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { AiOutlineEdit } from "react-icons/ai"
+import { BsInfoCircle } from "react-icons/bs"
+import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md"
+import BooksCard from '../components/home/BooksCard'
+import BooksTable from '../components/home/BooksTable'
 
 export default function Home() {
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [layout, setLayout] = useState('table')
 
   useEffect(() => {
     setLoading(true)
@@ -20,6 +23,14 @@ export default function Home() {
 
   return (
     <div className='p-4'>
+      <div className='flex justify-center items-center gap-x-4'>
+        <button
+          className='text-white font-medium text-sm bg-sky-400 hover:bg-sky-500 transition duration-200 ease-in-out px-2.5 py-1.5 lg:px-3 lg:py-2 rounded-md cursor-pointer'
+          onClick={() => setLayout(prev => prev === 'table' ? 'cards' : 'table')}
+        >
+          Toggle Table/Card Layout
+        </button>
+      </div>
       <div className='flex justify-between items-center my-2 p-2 lg:my-4'>
         <div className='flex justify-center items-center gap-1.5'>
           <div className='w-[40px] h-[40px]'>
@@ -42,43 +53,11 @@ export default function Home() {
         <div className="flex justify-center items-center h-[60vh]">
           <Spinner />
         </div>
+      ) : layout === 'table' ? (
+        <BooksTable books={books} />
       ) : (
-        <table className='w-full border-separate border-spacing-2 mt-4'>
-          <thead>
-            <tr>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>No</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Title</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Author</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
-              <th className='p-1 tracking-wide border border-slate-600 rounded-md'>Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book, index) => (
-              <tr key={book._id} className='h-8'>
-                <td className='border border-slate-700 rounded-md text-center'>{index + 1}</td>
-                <td className='border border-slate-700 rounded-md text-center'>{book.title}</td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>{book.author}</td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>{book.year}</td>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  <div className='flex justify-center gap-x-4'>
-                    <Link to={`/books/details/${book._id}`} title="Book Details">
-                      <BsInfoCircle className='text-xl text-blue-500 hover:text-blue-600' />
-                    </Link>
-                    <Link to={`/books/edit/${book._id}`} title="Edit Book">
-                      <AiOutlineEdit className='text-xl text-yellow-500 hover:text-yellow-600' />
-                    </Link>
-                    <Link to={`/books/delete/${book._id}`} title="Delete Book">
-                      <MdOutlineDelete className='text-xl text-red-600 hover:text-red-700' />
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <BooksCard books={books} />
       )}
-
     </div>
   )
 }
