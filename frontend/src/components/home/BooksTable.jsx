@@ -41,7 +41,7 @@ export default function BooksTable({ books }) {
               {book.year}
             </td>
             <td className="border border-slate-700 rounded-md text-center">
-              <div className="flex justify-center gap-x-4">
+              <div className="flex justify-evenly items-center">
                 <Link to={`/books/details/${book._id}`} title="Book Details">
                   <BsInfoCircleFill className="text-xl text-blue-500 hover:text-blue-600" />
                 </Link>
