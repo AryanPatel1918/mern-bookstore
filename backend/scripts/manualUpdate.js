@@ -5,7 +5,7 @@ import { MONGO_URI } from "../config.js";
 console.log("Loaded MONGO_URI:", JSON.stringify(MONGO_URI));
 
 
-// Deletes ALL documents
+// Deletes ALL documents and ADDS some default books
 await mongoose.connect(MONGO_URI);
 await Book.deleteMany()
 await Book.insertMany([
