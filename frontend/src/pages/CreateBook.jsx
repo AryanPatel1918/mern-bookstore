@@ -3,6 +3,7 @@ import axios from 'axios'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function CreateBook() {
   const [book, setBook] = useState({
@@ -25,7 +26,7 @@ export default function CreateBook() {
 
     // Frontend validation
     if (!title || !author || !year) {
-      alert("All fields are required")
+      toast.warn('All fields are required')
       return
     }
 
@@ -34,17 +35,17 @@ export default function CreateBook() {
     setLoading(true)
     axios.post('http://localhost:5000/books', data)
       .then(() => {
+        toast.success('Book created successfully')
         navigate('/')
       })
       .catch(error => {
         if (error.response) {
           console.log("Status: ", error.response.status)
           console.log("Data: ", error.response.data)
-          console.log("Message: ", error.response.data.error)
-          alert(error.response.data.error)
+          toast.error(`Error: Status ${error.response.status}, Message: ${error.response.data.error}`)
         } else {
           console.log("Error:", error.message)
-          alert("Error: Network error or server not reachable.")
+          toast.error('Error: Network error or server not reachable')
         }
       })
       .finally(() => setLoading(false))

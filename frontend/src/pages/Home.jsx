@@ -3,30 +3,34 @@ import axios from 'axios'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
 import { MdOutlineAddBox } from "react-icons/md"
-import BookCard from '../components/home/BookCard'
-import BooksTable from '../components/home/BooksTable'
+import BooksCardLayout from '../components/home/BooksCardLayout'
+import BooksTableLayout from '../components/home/BooksTableLayout'
 
 export default function Home() {
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [layout, setLayout] = useState('table')
 
   // Load layout from localStorage
   useEffect(() => {
-    const savedLayout = localStorage.getItem('layout');
-    if (savedLayout) setLayout(savedLayout);
+    const savedLayout = localStorage.getItem('layout')
+    if (savedLayout) setLayout(savedLayout)
   }, [])
 
   // Save layout to localStorage on change
   useEffect(() => {
-    localStorage.setItem('layout', layout);
+    localStorage.setItem('layout', layout)
   }, [layout])
 
   useEffect(() => {
     setLoading(true)
     axios.get('http://localhost:5000/books')
       .then(response => setBooks(response.data.data))
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        setError("Backend is offline. Please start the server.")
+      })
       .finally(() => setLoading(false))
   }, [])
 
@@ -62,14 +66,19 @@ export default function Home() {
         <div className="flex justify-center items-center h-[60vh]">
           <Spinner />
         </div>
-      ) : layout === 'table' ? (
-        <BooksTable books={books} />
-      ) : (
-        <div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {books.map(book => (
-            <BookCard key={book._id} book={book} />
-          ))}
+      ) : error ? (
+        <div className="text-center mt-10">
+          <h2 className="text-xl font-medium text-red-600">
+            Unable to load books. The server may be offline.
+          </h2>
+          <p className="text-slate-500 mt-1 font-medium">
+            Please start your backend and refresh the page.
+          </p>
         </div>
+      ) : layout === 'table' ? (
+        <BooksTableLayout books={books} />
+      ) : (
+        <BooksCardLayout books={books} />
       )}
     </div>
   )

@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify'
 
 export default function DeleteBook() {
   const [book, setBook] = useState({})
@@ -24,11 +25,12 @@ export default function DeleteBook() {
     axios
       .delete(`http://localhost:5000/books/${id}`)
       .then(() => {
+        toast.success('Book deleted successfully')
         navigate('/')
       })
       .catch((error) => {
         console.log("Error:", error.message)
-        alert("Error:" + error.message)
+        toast.error(`Error: ${error.message}`)
       })
       .finally(() => setLoading(false))
   }
