@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
@@ -6,6 +6,9 @@ import { IoIosSearch } from "react-icons/io"
 import { MdOutlineAddBox } from "react-icons/md"
 import BooksCardLayout from '../components/home/BooksCardLayout'
 import BooksTableLayout from '../components/home/BooksTableLayout'
+import BackendErrorState from '../components/home/BackendErrorState'
+import EmptyDatabaseState from '../components/home/EmptyDatabaseState'
+import SearchEmptyState from '../components/home/SearchEmptyState'
 
 export default function Home() {
   const [books, setBooks] = useState([])
@@ -16,9 +19,14 @@ export default function Home() {
     return localStorage.getItem('layout') || 'table'
   })
 
-  const filteredBooks = books.filter(book => 
-    book.title.toLowerCase().includes(searchText.trim().toLowerCase())
-  )  
+  const filteredBooks = useMemo(() => {
+    const text = searchText.trim().toLowerCase()
+    return books.filter(book => 
+      book.title.toLowerCase().includes(text) ||
+      book.author.toLowerCase().includes(text) ||
+      String(book.year).includes(text)
+    )
+  }, [books, searchText])
 
   // Save layout to localStorage on change
   useEffect(() => {
@@ -59,13 +67,13 @@ export default function Home() {
             <span className='text-red-500'>s</span>
           </h1>
         </div>
-        <div className='flex justify-center items-center pt-1 pb-1 pl-2 pr-2 gap-1 border-2 border-blue-400 rounded-4xl'>
+        <div className='flex justify-center items-center pt-1 pb-1 pl-2 pr-2 gap-1 border-2 border-blue-400 rounded-full'>
           <IoIosSearch className='text-lg text-gray-600' />
           <input
-            className='outline-0 w-[100px] sm:w-[150px] md:w-[250px] lg:w-[350px]'
+            className='outline-0 text-sm md:text-base w-[100px] sm:w-[200px] md:w-[250px] lg:w-[350px]'
             onChange={e => setSearchText(e.target.value)}
             value={searchText}
-            placeholder='Search book' />
+            placeholder='Search by title, author, or year…' />
         </div>
         <Link to='/books/create' title="Create Book" className='flex justify-center items-center gap-1 bg-green-500 hover:bg-green-600 transition duration-200 ease-in-out px-2 py-1.5 lg:px-3 lg:py-2 rounded-lg'>
           <MdOutlineAddBox className='text-white text-2xl' />
@@ -77,35 +85,15 @@ export default function Home() {
           <Spinner />
         </div>
       ) : error ? (
-        <div className="text-center mt-10">
-          <h2 className="text-xl font-medium text-red-600">
-            Unable to load books. The server may be offline.
-          </h2>
-          <p className="text-slate-500 mt-1 font-medium">
-            Please start your backend and refresh the page.
-          </p>
-        </div>
+        <BackendErrorState />
       ) : books.length === 0 ? (
-        <div className="text-center mt-10">
-          <h2 className="text-xl lg:text-2xl font-medium text-slate-700">
-            No books found.
-          </h2>
-          <p className="text-slate-500 mt-1 lg:text-lg">
-            Click <span className="text-green-500 font-semibold">"Create Book"</span> to add your first one!
-          </p>
-        </div>
+        <EmptyDatabaseState />
       ) : filteredBooks.length === 0 ? (
-        <div className="text-center mt-10 wrap-break-word">
-          <h2 className="text-xl lg:text-2xl font-medium text-slate-700">
-            No results found for "<span className='font-semibold'>{searchText}</span>"
-          </h2>
-        </div>
+        <SearchEmptyState text={searchText} />
+      ) : layout === 'table' ? (
+        <BooksTableLayout books={filteredBooks} />
       ) : (
-        layout === 'table' ? (
-          <BooksTableLayout books={filteredBooks} />
-        ) : (
-          <BooksCardLayout books={filteredBooks} />
-        ) 
+        <BooksCardLayout books={filteredBooks} />
       )}
     </div>
   )

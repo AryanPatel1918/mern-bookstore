@@ -11,8 +11,8 @@ export default function BookCard({ book }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
-    <div className='border-2 border-blue-400 rounded-lg px-4 py-2 relative hover:shadow-xl'>
-      <h2 className='absolute top-2 right-2 px-3 py-1 bg-red-300 rounded-lg shadow'>{book.year}</h2>
+    <div className='border-1 border-b-4 border-blue-400 rounded-lg px-4 py-2 relative hover:shadow-xl hover:shadow-blue-400/40 hover:-translate-y-1 md:hover:-translate-y-2 transition duration-300 ease-in-out'>
+      <h2 className='absolute top-2 right-2 px-3 py-1 bg-red-400 text-white rounded-lg shadow'>{book.year}</h2>
       <h4 className='my-2 text-gray-400 font-mono break-all'>{book._id}</h4>
       <div className="flex justify-start items-center gap-x-2">
         <PiBookOpenTextLight className='text-red-400 text-2xl' />
