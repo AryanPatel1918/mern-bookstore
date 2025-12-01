@@ -7,7 +7,7 @@ import { BiUserCircle } from "react-icons/bi"
 export default function BookModal({ book, closeModal }) {
   return (
     <div onClick={closeModal} className="fixed bg-black/60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center">
-        <div onClick={e => e.stopPropagation()} className="w-[600px] max-w-full h-[400px] bg-white border-3 rounded-xl p-5 flex flex-col relative">
+        <div onClick={e => e.stopPropagation()} className="w-[600px] max-w-full h-[400px] bg-white border-2 rounded-xl p-5 flex flex-col relative">
             <IoIosCloseCircle onClick={closeModal} className="absolute right-4 top-4 text-4xl text-red-500 hover:text-red-600 cursor-pointer" title="Close Preview" />
             <h4 className='my-2 text-gray-500'>{book._id}</h4>
             <div className="flex justify-start items-center gap-x-2">
