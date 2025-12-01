@@ -24,15 +24,15 @@ export default function BookCard({ book }) {
           <h2 className='my-1'>{book.author}</h2>
         </div>
         <div className='flex justify-evenly items-center mt-4 p-2'>
-          <BiShow onClick={() => setShowModal(true)} className='text-3xl text-gray-600 hover:text-gray-700 cursor-pointer' title='Preview' />
+          <BiShow onClick={() => setShowModal(true)} className='text-3xl text-gray-500 hover:text-gray-700 transition-colors cursor-pointer' title='Preview' />
           <Link to={`/books/details/${book._id}`} title="Book Details">
-            <BsInfoCircleFill className='text-2xl text-blue-500 hover:text-blue-600' />
+            <BsInfoCircleFill className='text-2xl text-blue-500 hover:text-blue-600 transition-colors' />
           </Link>
           <Link to={`/books/edit/${book._id}`} title="Edit Book">
-            <AiFillEdit className='text-2xl text-yellow-500 hover:text-yellow-600' />
+            <AiFillEdit className='text-2xl text-yellow-500 hover:text-yellow-600 transition-colors' />
           </Link>
           <Link to={`/books/delete/${book._id}`} title="Delete Book">
-            <MdDelete className="text-2xl text-red-500 hover:text-red-600" />
+            <MdDelete className="text-2xl text-red-500 hover:text-red-600 transition-colors" />
           </Link>
         </div>
       </div>

@@ -5,57 +5,51 @@ import { MdDelete } from "react-icons/md"
 
 export default function BooksTableLayout({ books }) {
   return (
-    <table className="w-full border-separate border-spacing-2 mt-4">
-      <thead>
-        <tr>
-          <th className="p-1 tracking-wide border border-slate-600 rounded-md">
-            No
-          </th>
-          <th className="p-1 tracking-wide border border-slate-600 rounded-md">
-            Title
-          </th>
-          <th className="p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden">
-            Author
-          </th>
-          <th className="p-1 tracking-wide border border-slate-600 rounded-md max-md:hidden">
-            Publish Year
-          </th>
-          <th className="p-1 tracking-wide border border-slate-600 rounded-md">
-            Options
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {books.map((book, index) => (
-          <tr key={book._id} className="h-8 hover:bg-slate-100 transition-colors">
-            <td className="border border-slate-700 rounded-md text-center">
-              {index + 1}
-            </td>
-            <td className="border border-slate-700 rounded-md text-center">
-              {book.title}
-            </td>
-            <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-              {book.author}
-            </td>
-            <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-              {book.year}
-            </td>
-            <td className="border border-slate-700 rounded-md text-center">
-              <div className="flex justify-evenly items-center">
-                <Link to={`/books/details/${book._id}`} title="Book Details">
-                  <BsInfoCircleFill className="text-xl text-blue-500 hover:text-blue-600" />
-                </Link>
-                <Link to={`/books/edit/${book._id}`} title="Edit Book">
-                  <AiFillEdit className="text-xl text-yellow-500 hover:text-yellow-600" />
-                </Link>
-                <Link to={`/books/delete/${book._id}`} title="Delete Book">
-                  <MdDelete className="text-xl text-red-600 hover:text-red-700" />
-                </Link>
-              </div>
-            </td>
+    <div className="overflow-x-auto mt-4 shadow-md">
+      <table className="min-w-full border-collapse border border-slate-300">
+        <thead className="bg-slate-200">
+          <tr>
+            <th className="p-2 text-sm font-semibold text-slate-700 border border-slate-300">
+              No
+            </th>
+            <th className="p-2 text-sm font-semibold text-slate-700 border border-slate-300">
+              Title
+            </th>
+            <th className="p-2 text-sm font-semibold text-slate-700 border border-slate-300 hidden md:table-cell">
+              Author
+            </th>
+            <th className="p-2 text-sm font-semibold text-slate-700 border border-slate-300 hidden md:table-cell">
+              Publish Year
+            </th>
+            <th className="p-2 text-sm font-semibold text-slate-700 border border-slate-300">
+              Options
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {books.map((book, index) => (
+            <tr key={book._id} className="hover:bg-slate-100 transition-colors even:bg-slate-50">
+              <td className="border border-slate-300 text-center p-2">{index + 1}</td>
+              <td className="border border-slate-300 text-center p-2">{book.title}</td>
+              <td className="border border-slate-300 text-center p-2 hidden md:table-cell">{book.author}</td>
+              <td className="border border-slate-300 text-center p-2 hidden md:table-cell">{book.year}</td>
+              <td className="border border-slate-300 text-center p-2">
+                <div className="flex justify-evenly">
+                  <Link to={`/books/details/${book._id}`} title="Book Details">
+                    <BsInfoCircleFill className="text-blue-500 hover:text-blue-600 transition-colors text-lg" />
+                  </Link>
+                  <Link to={`/books/edit/${book._id}`} title="Edit Book">
+                    <AiFillEdit className="text-yellow-500 hover:text-yellow-600 transition-colors text-lg" />
+                  </Link>
+                  <Link to={`/books/delete/${book._id}`} title="Delete Book">
+                    <MdDelete className="text-red-600 hover:text-red-700 transition-colors text-lg" />
+                  </Link>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

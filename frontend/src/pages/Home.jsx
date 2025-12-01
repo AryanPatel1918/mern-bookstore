@@ -48,7 +48,7 @@ export default function Home() {
     <div className='p-4'>
       <div className='flex justify-center items-center gap-x-4'>
         <button
-          className='text-white font-medium text-sm bg-sky-400 hover:bg-sky-500 transition duration-200 ease-in-out px-2.5 py-1.5 lg:px-3 lg:py-2 rounded-md cursor-pointer'
+          className='text-white font-medium text-sm bg-sky-400 hover:bg-sky-500 transition-colors px-2.5 py-1.5 lg:px-3 lg:py-2 rounded-md cursor-pointer'
           onClick={() => setLayout(prev => prev === 'table' ? 'cards' : 'table')}
         >
           Switch to {layout === 'table' ? 'Cards' : 'Table'}
