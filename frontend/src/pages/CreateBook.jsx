@@ -30,6 +30,21 @@ export default function CreateBook() {
       return
     }
 
+    if (title.length > 100) {
+      toast.warn('Title cannot exceed 100 characters')
+      return
+    }
+
+    if (author.length > 60) {
+      toast.warn('Author name cannot exceed 60 characters')
+      return
+    }
+
+    if (isNaN(Number(year)) || Number(year) > 9999) {
+      toast.warn("Year must be a valid number up to 4 digits")
+      return
+    }
+
     const data = { title, author, year: Number(year) }
 
     setLoading(true)
