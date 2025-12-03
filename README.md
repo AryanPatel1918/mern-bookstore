@@ -57,7 +57,7 @@ A **Full Stack MERN (MongoDB, Express, React, Node.js)** application to manage b
     npm install
     ```
 
-4. **Create a .env file**
+4. **Create a .env file inside the backend folder**
     ```bash
     PORT=5000
     MONGO_URI=your_mongodb_connection_string
@@ -83,4 +83,4 @@ A **Full Stack MERN (MongoDB, Express, React, Node.js)** application to manage b
     npm run dev
     ```
 
-3. **Open the app in the browser:** http://localhost:5173/
+9. **Open the app in the browser:** http://localhost:5173/
