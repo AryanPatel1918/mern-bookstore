@@ -1,6 +1,6 @@
 # 📚 MERN Bookstore
 
-A **MERN (MongoDB, Express, React, Node.js)** application to manage books. Users can create, read, update, and delete books, and search through them in a table or card layout.
+A **Full Stack MERN (MongoDB, Express, React, Node.js)** application to manage books. Users can create, read, update, and delete books, and search through them in a table or card layout.
 
 ## 🚀 Features
 
@@ -19,6 +19,25 @@ A **MERN (MongoDB, Express, React, Node.js)** application to manage books. Users
 - **Frontend:** React, React Router, Tailwind CSS, React Icons, Axios, React Toastify  
 - **Backend:** Node.js, Express.js, MongoDB, Mongoose  
 - **Other:** CORS, dotenv, Nodemon (for development)
+
+## 📸 Screenshots
+**Homepage (table layout):**
+![Home](assets/home_table_layout.png)
+
+**Homepage (card layout):**
+![Home](assets/home_card_layout.png)
+
+**Create Book:**
+![Home](assets/create_book.png)
+
+**Show Book:**
+![Home](assets/show_book.png)
+
+**Edit Book:**
+![Home](assets/edit_book.png)
+
+**Delete Book:**
+![Home](assets/delete_book.png)
 
 ## 📦 Installation & Setup
 
