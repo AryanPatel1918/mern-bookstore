@@ -3,7 +3,7 @@ import { Book } from '../models/bookModel.js'
 // Get all books
 export async function getAllBooks(req, res) {
     try {
-        const books = await Book.find()
+        const books = await Book.find().sort({ updatedAt: -1 })
         res.json({ count: books.length, data: books })
     } catch (error) {
         console.log(error.message)
